@@ -7,19 +7,13 @@ import LogButton from './LogButton.js'
 
 export default function CardPage(props) {
 
-  const [score, setScore] = useState();
   const name = props.name;
   const user = {
     name: props.name,
     task: props.task
   } 
-
-  useEffect(() => {
-    axios.post('https://qline-api21.herokuapp.com/get_score', user)
-    .then(res => {
-      setScore(res.data[name]);
-    });
-  }, [])
+  console.log("res is")
+  console.log(props.score)
   
   return (
     <Card text="dark" className={(props.isMe) ? "MyCard" : "card"}>
@@ -34,7 +28,7 @@ export default function CardPage(props) {
         <Progress updated={props.updated} data={props.res[name]}/>
         <br />
         <br />
-        <div className="score"> <i class="fas fa-star"></i> {(props.isMe) ? "Your Score: " : "Score: "} {score} </div>
+        <div className="score"> <i class="fas fa-star"></i> {(props.isMe) ? "Your Score: " : "Score: "} {props.score} </div>
         <br /> 
         <br /> 
         {(props.isMe) ? <LogButton setUpdatedAlready={props.setUpdated} name={props.name} task={props.task} /> : null }
